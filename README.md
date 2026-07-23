@@ -1628,6 +1628,13 @@ CodeGuard AI now supports automated static analysis through a modular multi-agen
 
 ---
 
+<img width="1889" height="911" alt="Image" src="https://github.com/user-attachments/assets/5c2a7e7e-b4f1-4d4a-b9d5-2c55d0e39c89" />
+<img width="1871" height="895" alt="Image" src="https://github.com/user-attachments/assets/701792d1-f416-4f92-b24b-ad62a5e7b8d4" />
+<img width="1360" height="770" alt="Image" src="https://github.com/user-attachments/assets/22888716-00a5-4d7d-860d-4cb8921dc258" />
+<img width="1413" height="757" alt="Image" src="https://github.com/user-attachments/assets/faef5697-f625-4c3b-97e0-6bae44c85f6b" />
+<img width="1392" height="863" alt="Image" src="https://github.com/user-attachments/assets/0c37e368-3336-4cc5-a773-7dda39ee495f" />
+
+
 # Next Milestone
 
 ## Milestone 3 (Week 5–6)
