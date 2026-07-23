@@ -1,7 +1,5 @@
 # CodeGuard AI
 
-<<<<<<< HEAD
-
 
 ## AI Code Review & Security Analysis Agent
 
@@ -1419,4 +1417,3 @@ Focus areas:
 * Multi-agent collaboration
 * AI-assisted remediation
 * Automated review summaries
->>>>>>> 1531191af093a80f3210f86d27329a7547b6a412
