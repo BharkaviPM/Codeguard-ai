@@ -1,6 +1,5 @@
 # CodeGuard AI
 
-
 ## AI Code Review & Security Analysis Agent
 
 
@@ -1403,17 +1402,253 @@ The system now supports:
 This milestone establishes a strong foundation for the production-grade multi-agent architecture that will be developed in Milestone 2.
 
 ---
+# Milestone 2 Completion Report
+
+---
+
+# Milestone Overview
+
+During Weeks 3–4, the focus shifted from building the foundational
+RAG infrastructure to implementing the intelligent analysis engine.
+This milestone introduces the first production-ready AI agents capable
+of automatically reviewing source code for quality and security issues.
+
+---
+
+# Milestone Objectives
+
+The primary objectives were:
+
+• Build Code Analysis Agent
+• Build Security Vulnerability Agent
+• Implement Multi-Agent Orchestration
+• Validate Detection Accuracy
+• Standardize Findings
+• Prepare foundation for AI Remediation
+
+---
+
+# Completed Features
+
+## 1. Code Analysis Agent
+
+Implemented a modular static analysis agent capable of identifying:
+
+• Code smells
+• Long methods
+• Large classes
+• Duplicate code
+• High cyclomatic complexity
+• Dead code
+• Unused imports
+• Design anti-patterns
+• Naming convention violations
+
+Outputs include:
+
+• Finding ID
+• File path
+• Line number
+• Severity
+• Category
+• Description
+• Recommendation
+
+---
+
+## 2. Security Vulnerability Agent
+
+Implemented an automated security scanning agent supporting:
+
+• SQL Injection
+• Command Injection
+• Hardcoded Secrets
+• Weak Cryptography
+• Insecure Deserialization
+• Path Traversal
+• Unsafe File Operations
+• Broken Authentication
+• Insecure Randomness
+• Unsafe YAML Loading
+• OWASP Top 10 Mapping
+
+Each finding contains:
+
+• Vulnerability Type
+• CWE / OWASP Mapping
+• Severity
+• File
+• Line
+• Description
+• Suggested Fix
+
+---
+
+## 3. Analyzer Registry
+
+Designed a dynamic analyzer registration framework.
+
+Features:
+
+• Plug-and-play analyzers
+• Automatic discovery
+• Extensible architecture
+• Language-independent design
+• Easy integration of future analyzers
+
+---
+
+## 4. Multi-Agent Orchestration
+
+Implemented parallel execution of:
+
+├── Code Analysis Agent
+└── Security Vulnerability Agent
+
+Outputs are merged into a unified findings collection.
+
+Benefits:
+
+• Faster execution
+• Modular architecture
+• Independent agent scalability
+• Simplified result aggregation
+
+---
+
+## 5. Unified Findings Model
+
+Created a standardized schema for all analysis results.
+
+Includes:
+
+• Rule ID
+• Severity
+• Category
+• Confidence
+• Description
+• Recommendation
+• File
+• Line Number
+
+---
+
+## 6. Detection Validation
+
+Validated both agents using sample Python and Java repositories containing:
+
+• Code smells
+• Complexity issues
+• Security vulnerabilities
+• Poor design practices
+
+Verified:
+
+• Detection accuracy
+• Severity classification
+• False positive handling
+• Result consistency
+
+---
+
+# Multi-Agent Workflow
+
+User Upload
+
+↓
+
+Language Detection
+
+↓
+
+File Scanner
+
+↓
+
+Parallel Execution
+
+├── Code Analysis Agent
+
+└── Security Agent
+
+↓
+
+Merge Findings
+
+↓
+
+Unified Report
+
+↓
+
+Database Storage
+
+↓
+
+API Response
+
+---
+
+# Milestone 2 Deliverables
+
+| Deliverable | Status |
+|------------|--------|
+| Code Analysis Agent | ✅ Completed |
+| Security Vulnerability Agent | ✅ Completed |
+| Analyzer Registry | ✅ Completed |
+| Multi-Agent Orchestration | ✅ Completed |
+| Unified Findings Model | ✅ Completed |
+| Severity Classification | ✅ Completed |
+| OWASP Mapping | ✅ Completed |
+| Validation Testing | ✅ Completed |
+
+---
+
+# Current Limitations
+
+Current implementation does not yet include:
+
+• AI-generated code fixes
+• LangGraph workflow orchestration
+• Automatic report generation
+• GitHub Pull Request integration
+• Incremental scanning
+• Background task execution
+• Cross-file dependency analysis
+
+These enhancements are planned for Milestone 3.
+
+---
+
+# Milestone 2 Status
+
+**Status:** Completed
+
+CodeGuard AI now supports automated static analysis through a modular multi-agent architecture. The platform can independently analyze code quality and security vulnerabilities, aggregate results into a unified report, and provide structured findings with severity scoring and precise source locations.
+
+---
 
 # Next Milestone
 
-**Milestone 2 – Static Analysis & Multi-Agent Architecture**
+## Milestone 3 (Week 5–6)
 
-Focus areas:
+### Objectives
 
-* Production-grade RAG refactoring
-* Static code analysis
-* Security vulnerability detection
-* LangGraph orchestration
-* Multi-agent collaboration
-* AI-assisted remediation
-* Automated review summaries
+1. Build AI Remediation Agent
+   - Generate secure, context-aware code fixes for identified issues.
+   - Explain why each fix is recommended and reference secure coding best practices.
+
+2. Integrate LangGraph Workflow
+   - Orchestrate all analysis and remediation agents through a production-grade LangGraph pipeline.
+   - Enable state management, agent communication, and fault-tolerant execution.
+
+3. Generate Automated Review Reports
+   - Produce comprehensive HTML, PDF, and Markdown reports.
+   - Include executive summaries, severity distribution, remediation guidance, and metrics.
+
+4. Develop AI Chat & Review Assistant
+   - Allow users to ask questions about findings, vulnerabilities, and recommended fixes using Retrieval-Augmented Generation (RAG).
+
+5. Prepare for GitHub Integration
+   - Design the pull request review workflow and repository scanning pipeline for automated code reviews.
+
