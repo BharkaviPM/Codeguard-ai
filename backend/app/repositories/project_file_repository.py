@@ -34,7 +34,6 @@ class ProjectFileRepository:
         self.db.commit()
 
         for file in files:
-
             self.db.refresh(file)
 
         return files
@@ -45,19 +44,14 @@ class ProjectFileRepository:
     ):
 
         return (
-
             self.db.query(ProjectFile)
-
             .filter(
                 ProjectFile.project_id == project_id
             )
-
             .order_by(
                 ProjectFile.relative_path
             )
-
             .all()
-
         )
 
     def delete_by_project(
@@ -66,15 +60,11 @@ class ProjectFileRepository:
     ):
 
         (
-
             self.db.query(ProjectFile)
-
             .filter(
                 ProjectFile.project_id == project_id
             )
-
             .delete()
-
         )
 
         self.db.commit()

@@ -1,1 +1,3 @@
-from .flake8_service import Flake8Service
+"""
+Analysis services package.
+"""

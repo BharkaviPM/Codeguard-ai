@@ -2,20 +2,18 @@ from pathlib import Path
 
 from sqlalchemy.orm import Session
 
-from app.models.project_file import ProjectFile
 from app.models.code_metric import CodeMetric
 
-from app.repositories.project_file_repository import ProjectFileRepository
-from app.repositories.code_metric_repository import CodeMetricRepository
+from app.repositories.project_file_repository import (
+    ProjectFileRepository,
+)
+from app.repositories.code_metric_repository import (
+    CodeMetricRepository,
+)
 
 from app.services.scanner.analyzer import ASTAnalyzer
 from app.services.scanner.metrics_service import MetricsService
 from app.services.scanner.radon_service import RadonService
-from app.services.analysis.flake8_service import Flake8Service
-from app.models.issue import Issue
-
-from app.repositories.issue_repository import IssueRepository
-from app.models.project_file import ProjectFile
 
 
 class ScannerService:
@@ -25,18 +23,11 @@ class ScannerService:
         self.db = db
 
         self.project_file_repository = ProjectFileRepository(db)
-
         self.metric_repository = CodeMetricRepository(db)
 
         self.analyzer = ASTAnalyzer()
-
         self.metrics = MetricsService()
-
         self.radon = RadonService()
-
-        self.flake8 = Flake8Service()
-
-        self.issue_repository = IssueRepository(db)
 
     def scan_project(
         self,
@@ -44,99 +35,32 @@ class ScannerService:
         workspace: str,
     ):
 
-        source = Path(workspace) / "source"
+        source_folder = Path(workspace) / "source"
+
+        project_files = self.project_file_repository.get_by_project(
+            project_id
+        )
 
         scanned_files = []
 
-        for file in source.rglob("*"):
+        for project_file in project_files:
 
-            if not file.is_file():
+            file_path = (
+                source_folder /
+                project_file.relative_path
+            )
+
+            if not file_path.exists():
                 continue
 
-            try:
+            # AST Analysis
+            self.analyzer.analyze(file_path)
 
-                with open(
-                    file,
-                    "r",
-                    encoding="utf-8",
-                    errors="ignore",
-                ) as f:
+            # Code Metrics
+            metrics = self.metrics.calculate(file_path)
 
-                    line_count = len(f.readlines())
-
-            except Exception:
-
-                line_count = 0
-
-            # ---------- AST ----------
-            ast_result = self.analyzer.analyze(file)
-
-            # ---------- Metrics ----------
-            metrics = self.metrics.calculate(file)
-
-            # ---------- Radon ----------
-            radon = self.radon.analyze(file)
-
-            print("\n========== AST ==========")
-            print(ast_result)
-
-            print("\n========== Metrics ==========")
-            print(metrics)
-
-            print("\n========== Radon ==========")
-            print(radon)
-
-            flake8_issues = self.flake8.analyze(file)
-
-            for issue in flake8_issues:
-
-                db_issue = Issue(
-
-                project_file_id=project_file.id,
-
-                tool="Flake8",
-
-                severity=issue["severity"],
-
-                line=issue["line"],
-
-                code="FLAKE8",
-
-                message=issue["message"]
-
-            )
-
-            self.issue_repository.create(db_issue)
-
-            print("\n========== FLAKE8 ==========")
-
-            print(flake8_issues)
-
-            print("============================\n")
-
-            project_file = ProjectFile(
-
-                project_id=project_id,
-
-                filename=file.name,
-
-                relative_path=str(
-                    file.relative_to(source)
-                ),
-
-                extension=file.suffix,
-
-                language=self.detect_language(file),
-
-                size=file.stat().st_size,
-
-                line_count=line_count
-
-            )
-
-            project_file = self.project_file_repository.create(
-                project_file
-            )
+            # Radon Analysis
+            self.radon.analyze(file_path)
 
             metric = CodeMetric(
 
@@ -171,36 +95,3 @@ class ScannerService:
             scanned_files.append(project_file)
 
         return scanned_files
-
-    def detect_language(self, file: Path):
-
-        mapping = {
-
-            ".py": "Python",
-
-            ".java": "Java",
-
-            ".js": "JavaScript",
-
-            ".ts": "TypeScript",
-
-            ".cpp": "C++",
-
-            ".c": "C",
-
-            ".cs": "C#",
-
-            ".go": "Go",
-
-            ".php": "PHP",
-
-            ".rb": "Ruby",
-
-        }
-
-        return mapping.get(
-            file.suffix.lower(),
-            "Unknown"
-        )
-    
-    

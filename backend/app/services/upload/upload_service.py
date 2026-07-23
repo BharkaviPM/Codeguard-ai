@@ -93,7 +93,7 @@ class UploadService:
 
         project = self.project_repository.create(project)
 
-        # Save uploaded file information
+        # Create ProjectFile
         project_file = ProjectFile(
 
             project_id=project.id,

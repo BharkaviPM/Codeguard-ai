@@ -1,56 +1,112 @@
-from pathlib import Path
 import subprocess
+import time
+from pathlib import Path
+
+from app.analyzers.base import BaseAnalyzer
+from app.agents.analysis.models import AnalysisResult
+from app.services.analysis.result_parser import ResultParser
 
 
-class Flake8Service:
+class Flake8Analyzer(BaseAnalyzer):
+    """
+    Flake8 Analyzer
 
-    def analyze(self, file_path: Path):
+    Runs Flake8 on every Python file in the project and converts
+    the output into unified Finding objects.
+    """
 
-        try:
+    name = "Flake8"
 
-            result = subprocess.run(
+    supported_languages = ["Python"]
 
-                [
-                    "flake8",
-                    str(file_path),
-                    "--max-line-length=100"
-                ],
+    def analyze(self, project_path: str) -> AnalysisResult:
 
-                capture_output=True,
+        start_time = time.time()
 
-                text=True
+        result = AnalysisResult(
+            analyzer=self.name,
+            findings=[],
+            metrics={},
+            execution_time=0.0,
+        )
 
-            )
+        project = Path(project_path)
 
-            issues = []
+        python_files = list(project.rglob("*.py"))
 
-            if result.stdout:
+        total_issues = 0
 
-                for line in result.stdout.splitlines():
+        for file in python_files:
 
-                    parts = line.split(":", 3)
+            try:
 
-                    if len(parts) < 4:
-                        continue
+                process = subprocess.run(
+                    [
+                        "flake8",
+                        str(file),
+                        "--max-line-length=100",
+                        "--statistics",
+                    ],
+                    capture_output=True,
+                    text=True,
+                    check=False,
+                )
 
-                    issues.append({
+                stdout = process.stdout.strip()
 
-                        "line": int(parts[1]),
+                if not stdout:
 
-                        "column": int(parts[2]),
+                    result.metrics[str(file)] = {
+                        "issues": 0,
+                        "status": "clean",
+                    }
 
-                        "message": parts[3].strip(),
+                    continue
 
-                        "tool": "flake8",
+                findings = ResultParser.parse_flake8(
+                    stdout.splitlines()
+                )
 
-                        "severity": "MEDIUM"
+                result.findings.extend(findings)
 
-                    })
+                total_issues += len(findings)
 
-            return issues
+                severity_counter = {
+                    "critical": 0,
+                    "high": 0,
+                    "medium": 0,
+                    "low": 0,
+                    "info": 0,
+                }
 
-        except Exception as ex:
+                for finding in findings:
 
-            print(ex)
+                    severity = finding.severity.value.lower()
 
-            return []
+                    if severity in severity_counter:
+                        severity_counter[severity] += 1
+
+                result.metrics[str(file)] = {
+                    "issues": len(findings),
+                    "severity": severity_counter,
+                }
+
+            except Exception as ex:
+
+                result.metrics[str(file)] = {
+                    "issues": 0,
+                    "status": "failed",
+                    "error": str(ex),
+                }
+
+        result.metrics["summary"] = {
+            "files_scanned": len(python_files),
+            "total_issues": total_issues,
+        }
+
+        result.execution_time = round(
+            time.time() - start_time,
+            3,
+        )
+
+        return result
