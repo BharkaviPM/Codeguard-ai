@@ -1631,24 +1631,3 @@ CodeGuard AI now supports automated static analysis through a modular multi-agen
 # Next Milestone
 
 ## Milestone 3 (Week 5–6)
-
-### Objectives
-
-1. Build AI Remediation Agent
-   - Generate secure, context-aware code fixes for identified issues.
-   - Explain why each fix is recommended and reference secure coding best practices.
-
-2. Integrate LangGraph Workflow
-   - Orchestrate all analysis and remediation agents through a production-grade LangGraph pipeline.
-   - Enable state management, agent communication, and fault-tolerant execution.
-
-3. Generate Automated Review Reports
-   - Produce comprehensive HTML, PDF, and Markdown reports.
-   - Include executive summaries, severity distribution, remediation guidance, and metrics.
-
-4. Develop AI Chat & Review Assistant
-   - Allow users to ask questions about findings, vulnerabilities, and recommended fixes using Retrieval-Augmented Generation (RAG).
-
-5. Prepare for GitHub Integration
-   - Design the pull request review workflow and repository scanning pipeline for automated code reviews.
-
