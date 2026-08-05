@@ -1,1640 +1,1044 @@
-# CodeGuard AI
-
-## AI Code Review & Security Analysis Agent
-
-
-
-**Milestone 1 Completion Report**
-
-
-
----
-
-
-
-# Project Overview
-
-
-
-CodeGuard AI is an AI-powered Code Review and Security Analysis platform designed to automate secure code reviews, detect security vulnerabilities, identify code quality issues, and provide intelligent remediation suggestions using Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), and a future multi-agent architecture.
-
-
-
-The project aims to reduce manual review effort while improving code quality and secure coding practices throughout the software development lifecycle.
-
-
-
----
-
-
-
-# Project Statement
-
-
-
-Software development teams frequently struggle with:
-
-
-
-* Inconsistent code quality
-
-* Undetected security vulnerabilities
-
-* Time-consuming manual code reviews
-
-* Lack of immediate secure coding guidance
-
-* Difficulty enforcing OWASP and secure coding standards
-
-
-
-CodeGuard AI addresses these challenges by combining static analysis, AI reasoning, and knowledge retrieval into an intelligent review platform.
-
-
-
----
-
-
-
-# Technology Stack
-
-
-
-## Backend
-
-
-
-* FastAPI
-
-* Python 3.13
-
-
-
-## AI Stack
-
-
-
-* Ollama
-
-* Llama 3
-
-* LangChain
-
-* ChromaDB
-
-* Nomic Embed Text
-
-
-
-## Database
-
-
-
-* PostgreSQL
-
-
-
-## Vector Database
-
-
-
-* ChromaDB
-
-
-
-## Document Processing
-
-
-
-* PyPDF
-
-* LangChain Document Loaders
-
-* Recursive Character Text Splitter
-
-
-
-## Development Tools
-
-
-
-* Uvicorn
-
-* Pydantic
-
-* SQLAlchemy
-
-* Alembic
-
-
-
----
-
-
-
-# Milestone 1 Objectives
-
-
-
-The first milestone focused on building the foundational infrastructure required for AI-assisted secure code review.
-
-
-
----
-
-
-
-# Completed Features
-
-
-
-## 1. Project Architecture
-
-
-
-Designed the complete backend architecture including:
-
-
-
-* Modular project structure
-
-* Service layer
-
-* API layer
-
-* Database layer
-
-* RAG layer
-
-* Knowledge Base
-
-* Upload Workspace
-
-
-
----
-
-
-
-## 2. Database Layer
-
-
-
-Implemented PostgreSQL integration with SQLAlchemy.
-
-
-
-Completed:
-
-
-
-* Database connection
-
-* Configuration management
-
-* Session management
-
-* Base models
-
-* Upload metadata storage
-
-
-
----
-
-
-
-## 3. Code Submission Module
-
-
-
-Implemented secure code submission support.
-
-
-
-Features include:
-
-
-
-* Python file upload
-
-* Java file upload
-
-* Direct code submission
-
-* Workspace storage
-
-* Syntax validation
-
-* Metadata persistence
-
-
-
----
-
-
-
-## 4. Secure Coding Knowledge Base
-
-
-
-Constructed the initial knowledge repository using authoritative secure coding documentation.
-
-
-
-Knowledge sources include:
-
-
-
-* OWASP Cheat Sheets
-
-* Secure Coding Standards
-
-* Java Secure Coding Guidelines
-
-* SQL Injection Prevention
-
-* Authentication Best Practices
-
-* Cryptography Guidelines
-
-
-
----
-
-
-
-## 5. Document Processing Pipeline
-
-
-
-Implemented an ingestion pipeline capable of:
-
-
-
-* Loading PDF documents
-
-* Splitting documents into semantic chunks
-
-* Preparing embeddings
-
-* Indexing documents into ChromaDB
-
-
-
----
-
-
-
-## 6. Embedding Pipeline
-
-
-
-Integrated:
-
-
-
-* nomic-embed-text
-
-
-
-Capabilities:
-
-
-
-* Vector generation
-
-* Semantic similarity search
-
-* Efficient retrieval
-
-
-
----
-
-
-
-## 7. Chroma Vector Database
-
-
-
-Implemented persistent vector storage.
-
-
-
-Capabilities:
-
-
-
-* Persistent vector index
-
-* Semantic document retrieval
-
-* Similarity search
-
-* Context retrieval
-
-
-
----
-
-
-
-## 8. Retrieval-Augmented Generation (RAG)
-
-
-
-Built an end-to-end Retrieval-Augmented Generation pipeline.
-
-
-
-Workflow:
-
-
-
-User Question
-
-
-
-↓
-
-
-
-Retriever
-
-
-
-↓
-
-
-
-Relevant Knowledge
-
-
-
-↓
-
-
-
-Prompt Construction
-
-
-
-↓
-
-
-
-Llama 3
-
-
-
-↓
-
-
-
-AI Response
-
-
-
----
-
-
-
-## 9. Conversational Code Assistant
-
-
-
-Implemented an AI-powered assistant capable of answering secure coding questions.
-
-
-
-Capabilities:
-
-
-
-* Secure coding guidance
-
-* OWASP explanations
-
-* Best practices
-
-* Vulnerability explanations
-
-* Context-aware responses
-
-* Source document references
-
-
-
-Example:
-
-
-
-Question:
-
-
-
-> What is SQL Injection?
-
-
-
-Response:
-
-
-
-* AI-generated explanation
-
-* Retrieved from OWASP documentation
-
-* Source references returned
-
-
-
----
-
-
-
-## 10. FastAPI REST API
-
-
-
-Implemented REST endpoints for:
-
-
-
-* Code upload
-
-* File validation
-
-* Conversational AI endpoint
-
-
-
-Successfully tested using Swagger UI.
-
-
-
----
-
-
-
-# Project Structure
-
-
-
-```
-
-backend/
-
-│
-
-├── app/
-
-│   ├── api/
-
-│   ├── core/
-
-│   ├── database/
-
-│   ├── models/
-
-│   ├── schemas/
-
-│   ├── services/
-
-│   ├── rag/
-
-│   ├── uploads/
-
-│   └── main.py
-
-│
-
-├── chroma_db/
-
-├── knowledge_base/
-
-├── workspace/
-
-├── requirements.txt
-
-└── README.md
-
-```
-
-
-
----
-
-
-
-# Current System Workflow
-
-
-
-```
-
-User
-
-
-
-↓
-
-
-
-Upload Code
-
-
-
-↓
-
-
-
-Validation
-
-
-
-↓
-
-
-
-Storage
-
-
-
-↓
-
-
-
-User Question
-
-
-
-↓
-
-
-
-Retriever
-
-
-
-↓
-
-
-
-ChromaDB
-
-
-
-↓
-
-
-
-Relevant Documents
-
-
-
-↓
-
-
-
-Prompt Builder
-
-
-
-↓
-
-
-
-Ollama (Llama 3)
-
-
-
-↓
-
-
-
-AI Response
-
-```
-
-
-
----
-
-
-
-# Milestone 1 Deliverables
-
-
-
-| Deliverable              | Status      |
-
-| ------------------------ | ----------- |
-
-| Project Architecture     | Completed |
-
-| PostgreSQL Integration   | Completed |
-
-| File Upload Module       | Completed |
-
-| Syntax Validation        | Completed |
-
-| Knowledge Base           | Completed |
-
-| PDF Loader               | Completed |
-
-| Chunking Pipeline        | Completed |
-
-| Embeddings               | Completed |
-
-| ChromaDB                 | Completed |
-
-| Retriever                | Completed |
-
-| RAG Pipeline             | Completed |
-
-| Ollama Integration       | Completed |
-
-| Conversational Assistant | Completed |
-
-| FastAPI APIs             | Completed |
-
-| Swagger Testing          | Completed |
-
-
-
----
-
-
-
-# Current Limitations
-
-
-
-The current implementation is intentionally modular and educational. While fully functional, it is not yet production-grade.
-
-
-
-Current limitations include:
-
-
-
-* RAG services are initialized per request.
-
-* Ollama client is not cached.
-
-* Retriever instances are recreated for each query.
-
-* Prompt templates are tightly coupled with business logic.
-
-* Limited structured logging.
-
-* Basic exception handling.
-
-* No dependency injection for AI services.
-
-* No request tracing or metrics.
-
-* No LangGraph orchestration.
-
-* No agent coordination layer.
-
-* Static analysis tools are not yet integrated.
-
-
-
-These limitations will be addressed in Milestone 2.
-
-
-
----
-
-
-
-# Milestone 2 Roadmap
-
-
-
-Milestone 2 introduces the intelligent multi-agent analysis pipeline.
-
-
-
-Planned components include:
-
-
-
-## Static Analysis Agent
-
-
-
-* AST Analysis
-
-* Radon
-
-* Flake8
-
-* Pylint
-
-* Complexity Analysis
-
-* Code Smell Detection
-
-
-
-## Security Agent
-
-
-
-* Bandit
-
-* Semgrep
-
-* Detect Secrets
-
-* pip-audit
-
-* OWASP Mapping
-
-
-
-## LangGraph Coordinator
-
-
-
-Responsible for orchestrating all AI agents.
-
-
-
-Workflow:
-
-
-
-```
-
-Coordinator
-
-
-
-├── Static Analysis Agent
-
-
-
-├── Security Agent
-
-
-
-├── AI Review Agent
-
-
-
-├── Remediation Agent
-
-
-
-└── PR Summary Agent
-
-```
-
-
-
-## AI Review
-
-
-
-* LLM-based code review
-
-* Design recommendations
-
-* Best practices
-
-* Secure coding improvements
-
-
-
-## Remediation Agent
-
-
-
-* Suggested code fixes
-
-* Secure alternatives
-
-* Explanation of vulnerabilities
-
-
-
-## Pull Request Summary Agent
-
-
-
-Automatically generates:
-
-
-
-* Executive Summary
-
-* Issues Found
-
-* Severity Breakdown
-
-* Recommended Fixes
-
-
-
----
-
-
-
-# Future Enhancements
-
-
-
-* GitHub Pull Request Integration
-
-* GitLab Integration
-
-* CI/CD Pipeline Support
-
-* VS Code Extension
-
-* Docker Deployment
-
-* Kubernetes Deployment
-
-* Authentication & Authorization
-
-* Redis Caching
-
-* Background Workers
-
-* Monitoring & Observability
-
-* Multi-language Support
-
-* Enterprise Dashboard
-
-
-
----
-
-
-
-# Milestone 1 Status
-
-
-
-**Status:** Completed
-
-
-
-The foundational infrastructure for CodeGuard AI has been successfully implemented.
-
-
-
-The system now supports:
-
-
-
-* AI-powered secure coding assistance
-
-* Retrieval-Augmented Generation (RAG)
-
-* Persistent knowledge retrieval
-
-* Conversational querying
-
-* Secure document indexing
-
-* RESTful API interaction
-
-
-
-This milestone establishes a strong foundation for the production-grade multi-agent architecture that will be developed in Milestone 2.
-
-
-
----
-
-
-
-# Next Milestone
-
-
-
-**Milestone 2 – Static Analysis & Multi-Agent Architecture**
-
-
-
-Focus areas:
-
-
-
-* Production-grade RAG refactoring
-
-* Static code analysis
-
-* Security vulnerability detection
-
-* LangGraph orchestration
-
-* Multi-agent collaboration
-
-* AI-assisted remediation
-
-* Automated review summaries
-=======
-## AI Code Review & Security Analysis Agent
-
-**Milestone 1 Completion Report**
+# 🛡️ CodeGuard v3
+
+## AI Code Review & Security Analysis Platform
+
+![Python](https://img.shields.io/badge/Python-3.13-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-Frontend-red)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue)
+![ChromaDB](https://img.shields.io/badge/ChromaDB-VectorDB-green)
+![Groq](https://img.shields.io/badge/Groq-LLM-orange)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
 # Project Overview
 
-CodeGuard AI is an AI-powered Code Review and Security Analysis platform designed to automate secure code reviews, detect security vulnerabilities, identify code quality issues, and provide intelligent remediation suggestions using Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), and a future multi-agent architecture.
+CodeGuard v3 is an AI-powered Code Review & Security Analysis Platform designed to automate software code reviews using a multi-agent architecture.
 
-The project aims to reduce manual review effort while improving code quality and secure coding practices throughout the software development lifecycle.
+The platform combines static code analysis, Retrieval-Augmented Generation (RAG), Large Language Models (Groq), and secure coding knowledge bases to identify code quality issues, detect OWASP-standard security vulnerabilities, generate remediation suggestions, and produce professional pull request summaries.
+
+Developers can upload or paste Python and Java source code, receive AI-powered analysis, ask follow-up security questions, and export structured reports through a modern Streamlit dashboard.
 
 ---
 
-# Project Statement
+# Problem Statement
 
 Software development teams frequently struggle with:
 
-* Inconsistent code quality
-* Undetected security vulnerabilities
-* Time-consuming manual code reviews
-* Lack of immediate secure coding guidance
-* Difficulty enforcing OWASP and secure coding standards
+- Inconsistent code quality
+- Undetected security vulnerabilities
+- Manual and time-consuming code reviews
+- Lack of secure coding guidance
+- Late detection of vulnerabilities
+- Difficulty following OWASP secure coding standards
 
-CodeGuard AI addresses these challenges by combining static analysis, AI reasoning, and knowledge retrieval into an intelligent review platform.
+CodeGuard v3 addresses these challenges through an intelligent multi-agent AI platform that automates secure code review while providing explainable recommendations and developer-friendly remediation guidance.
+
+---
+
+# Key Features
+
+✅ Python Code Analysis
+
+✅ Java Code Analysis
+
+✅ OWASP Security Detection
+
+✅ AI Code Review
+
+✅ AI Security Review
+
+✅ AI Remediation
+
+✅ Pull Request Summary Generation
+
+✅ Severity Scoring
+
+✅ Health Score Calculation
+
+✅ RAG-powered Secure Coding Assistant
+
+✅ ChromaDB Knowledge Base
+
+✅ PostgreSQL Storage
+
+✅ Streamlit Dashboard
+
+✅ JSON Report Export
+
+✅ Markdown Report Export
 
 ---
 
 # Technology Stack
 
+## Frontend
+
+- Streamlit
+
 ## Backend
 
-* FastAPI
-* Python 3.13
+- Python 3.13
 
-## AI Stack
+## AI
 
-* Ollama
-* Llama 3
-* LangChain
-* ChromaDB
-* Nomic Embed Text
+- Groq API
+- Prompt Engineering
+
+## Knowledge Retrieval
+
+- LangChain
+- ChromaDB
+- Sentence Transformers
 
 ## Database
 
-* PostgreSQL
+- PostgreSQL
 
-## Vector Database
+## Knowledge Base
 
-* ChromaDB
+- OWASP Cheat Sheets
+- CERT Secure Coding
+- CWE
+- Python Secure Coding
+- Java Secure Coding
 
-## Document Processing
+## Libraries
 
-* PyPDF
-* LangChain Document Loaders
-* Recursive Character Text Splitter
-
-## Development Tools
-
-* Uvicorn
-* Pydantic
-* SQLAlchemy
-* Alembic
-
----
-
-# Milestone 1 Objectives
-
-The first milestone focused on building the foundational infrastructure required for AI-assisted secure code review.
+- SQLAlchemy
+- PyPDFLoader
+- RecursiveCharacterTextSplitter
+- ReportLab
+- python-dotenv
+- Uvicorn
 
 ---
 
-# Completed Features
-
-## 1. Project Architecture
-
-Designed the complete backend architecture including:
-
-* Modular project structure
-* Service layer
-* API layer
-* Database layer
-* RAG layer
-* Knowledge Base
-* Upload Workspace
-
----
-
-## 2. Database Layer
-
-Implemented PostgreSQL integration with SQLAlchemy.
-
-Completed:
-
-* Database connection
-* Configuration management
-* Session management
-* Base models
-* Upload metadata storage
-
----
-
-## 3. Code Submission Module
-
-Implemented secure code submission support.
-
-Features include:
-
-* Python file upload
-* Java file upload
-* Direct code submission
-* Workspace storage
-* Syntax validation
-* Metadata persistence
-
----
-
-## 4. Secure Coding Knowledge Base
-
-Constructed the initial knowledge repository using authoritative secure coding documentation.
-
-Knowledge sources include:
-
-* OWASP Cheat Sheets
-* Secure Coding Standards
-* Java Secure Coding Guidelines
-* SQL Injection Prevention
-* Authentication Best Practices
-* Cryptography Guidelines
-
----
-
-## 5. Document Processing Pipeline
-
-Implemented an ingestion pipeline capable of:
-
-* Loading PDF documents
-* Splitting documents into semantic chunks
-* Preparing embeddings
-* Indexing documents into ChromaDB
-
----
-
-## 6. Embedding Pipeline
-
-Integrated:
-
-* nomic-embed-text
-
-Capabilities:
-
-* Vector generation
-* Semantic similarity search
-* Efficient retrieval
-
----
-
-## 7. Chroma Vector Database
-
-Implemented persistent vector storage.
-
-Capabilities:
-
-* Persistent vector index
-* Semantic document retrieval
-* Similarity search
-* Context retrieval
-
----
-
-## 8. Retrieval-Augmented Generation (RAG)
-
-Built an end-to-end Retrieval-Augmented Generation pipeline.
-
-Workflow:
-
-User Question
-
-↓
-
-Retriever
-
-↓
-
-Relevant Knowledge
-
-↓
-
-Prompt Construction
-
-↓
-
-Llama 3
-
-↓
-
-AI Response
-
----
-
-## 9. Conversational Code Assistant
-
-Implemented an AI-powered assistant capable of answering secure coding questions.
-
-Capabilities:
-
-* Secure coding guidance
-* OWASP explanations
-* Best practices
-* Vulnerability explanations
-* Context-aware responses
-* Source document references
-
-Example:
-
-Question:
-
-> What is SQL Injection?
-
-Response:
-
-* AI-generated explanation
-* Retrieved from OWASP documentation
-* Source references returned
-
----
-
-## 10. FastAPI REST API
-
-Implemented REST endpoints for:
-
-* Code upload
-* File validation
-* Conversational AI endpoint
-
-Successfully tested using Swagger UI.
-
----
-
-# Project Structure
-
+# 🏗️ System Architecture
+
+```text
+                    +---------------------------+
+                    |     Streamlit Dashboard   |
+                    +------------+--------------+
+                                 |
+                                 v
+                  +-----------------------------+
+                  |      Multi-Agent Engine      |
+                  +-------------+---------------+
+                                |
+      ---------------------------------------------------------
+      |               |               |              |         |
+      v               v               v              v         v
++-------------+ +-------------+ +-------------+ +-------------+ +-------------+
+| Code Agent  | | Security    | | Remediation | | Summary     | | Assistant   |
+|             | | Agent       | | Agent       | | Agent       | | Agent       |
++------+------+ +------+------+ +------+------+ +------+------+ +------+------+
+       |                |               |               |               |
+       ---------------------------------------------------------------
+                                |
+                                v
+                      +----------------------+
+                      |     Groq LLM API     |
+                      +----------+-----------+
+                                 |
+                                 v
+                   +----------------------------+
+                   |    RAG Knowledge Base      |
+                   |     (ChromaDB + PDFs)      |
+                   +------------+---------------+
+                                |
+        ---------------------------------------------------------
+        |             |             |             |             |
+        v             v             v             v             v
+      OWASP         CERT          CWE         Python         Java
 ```
-backend/
+
+---
+
+# 🤖 AI Agents
+
+CodeGuard v3 follows a **Multi-Agent Architecture**, where each agent performs an independent task and contributes to the final analysis.
+
+---
+
+## 📋 1. Code Analysis Agent
+
+### Responsibilities
+
+- Detect code smells
+- Missing documentation
+- Poor naming conventions
+- Complexity analysis
+- Maintainability issues
+- Best practice violations
+- Error handling issues
+- Readability improvements
+
+### Output
+
+- Static findings
+- AI code review
+- Severity statistics
+- Execution time
+
+---
+
+## 🔒 2. Security Agent
+
+### Responsibilities
+
+Detect common software vulnerabilities including:
+
+- SQL Injection
+- Command Injection
+- Unsafe eval()
+- Hardcoded Secrets
+- Path Traversal
+- Weak Input Validation
+- OWASP Top 10 vulnerabilities
+
+### Output
+
+- Security findings
+- Severity classification
+- AI security review
+- Execution time
+
+---
+
+## 🛠️ 3. Remediation Agent
+
+### Responsibilities
+
+Uses Groq AI to:
+
+- Explain detected issues
+- Describe security risks
+- Rewrite vulnerable code
+- Apply secure coding practices
+- Improve readability
+- Improve maintainability
+- Generate production-ready fixes
+
+### Output
+
+- Complete remediated code
+- Secure implementation
+- OWASP recommendations
+
+---
+
+## 📄 4. PR Summary Agent
+
+### Responsibilities
+
+Generate a professional Pull Request review including:
+
+- Executive Summary
+- Code Quality Summary
+- Security Summary
+- Severity Breakdown
+- Health Score
+- Risk Assessment
+- Priority Fixes
+- Overall Recommendation
+
+### Output
+
+Markdown Pull Request Report
+
+---
+
+## 💬 5. AI Assistant Agent
+
+The Assistant combines **Retrieval-Augmented Generation (RAG)** with Groq AI.
+
+### Features
+
+- Answers secure coding questions
+- Uses OWASP knowledge
+- Uses CERT Secure Coding
+- Uses CWE references
+- Python secure coding guidance
+- Java secure coding guidance
+- AI-powered explanations
+- Developer-friendly responses
+
+---
+
+# 📦 Core Modules
+
+The platform consists of the following modules:
+
+### Upload Module
+
+- Upload Python files
+- Upload Java files
+- Paste source code
+- Language selection
+
+---
+
+### Analysis Module
+
+- Static Code Analysis
+- Security Analysis
+- AI Code Review
+- AI Security Review
+
+---
+
+### Remediation Module
+
+- AI Code Fix Generation
+- Secure Code Recommendations
+- Best Practice Suggestions
+
+---
+
+### Reporting Module
+
+- Health Score
+- Severity Metrics
+- Pull Request Summary
+- JSON Export
+- Markdown Export
+
+---
+
+### Knowledge Module
+
+- Document Loader
+- Text Chunking
+- Embedding Generation
+- ChromaDB Indexing
+- Semantic Search
+
+---
+
+### Assistant Module
+
+- RAG Retrieval
+- Context Building
+- Groq Response Generation
+- Secure Coding Guidance
+
+---
+
+# 🔄 Complete Workflow
+
+```text
+Developer
+      │
+      ▼
+Upload Python / Java Code
+      │
+      ▼
+Language Detection
+      │
+      ▼
+Multi-Agent Orchestrator
+      │
+      ├──────────────────────► Code Analysis Agent
+      │
+      ├──────────────────────► Security Agent
+      │
+      ├──────────────────────► Remediation Agent
+      │
+      ├──────────────────────► Summary Agent
+      │
+      └──────────────────────► Assistant Agent
+                                │
+                                ▼
+                           ChromaDB
+                                │
+                                ▼
+                             Groq LLM
+                                │
+                                ▼
+                        Final AI Responses
+                                │
+                                ▼
+                     Streamlit Dashboard
+                                │
+                                ▼
+                    Download Reports
+```
+
+---
+
+# 🧠 Retrieval-Augmented Generation (RAG)
+
+CodeGuard v3 uses a Retrieval-Augmented Generation pipeline for secure coding assistance.
+
+```text
+User Question
+        │
+        ▼
+Retriever
+        │
+        ▼
+Top Relevant Documents
+        │
+        ▼
+Prompt Construction
+        │
+        ▼
+Groq LLM
+        │
+        ▼
+Professional Answer
+```
+
+### Knowledge Sources
+
+- OWASP Cheat Sheets
+- CERT Secure Coding Standards
+- CWE Documentation
+- Python Secure Coding Guide
+- Java Secure Coding Guide
+
+---
+
+# 📊 Dashboard Overview
+
+The Streamlit dashboard provides:
+
+- 📤 Source Code Upload
+- 📋 Code Analysis Results
+- 🔒 Security Findings
+- 🛠️ AI Remediation
+- 📄 Pull Request Summary
+- 💬 AI Assistant
+- 📥 JSON Export
+- 📥 Markdown Export
+- 📈 Health Score
+- 📊 Severity Dashboard
+
+
+---
+
+# 📁 Project Structure
+
+```text
+CodeGuard-AI-v3/
 │
 ├── app/
+│   ├── agents/
+│   │   ├── assistant_agent.py
+│   │   ├── code_agent.py
+│   │   ├── remediation_agent.py
+│   │   ├── security_agent.py
+│   │   └── summary_agent.py
+│   │
+│   ├── analyzers/
+│   │   ├── python_analyzer.py
+│   │   └── java_analyzer.py
+│   │
 │   ├── api/
+│   │
 │   ├── core/
+│   │   └── config.py
+│   │
 │   ├── database/
-│   ├── models/
-│   ├── schemas/
-│   ├── services/
+│   │   ├── database.py
+│   │   ├── models.py
+│   │   └── session.py
+│   │
 │   ├── rag/
-│   ├── uploads/
-│   └── main.py
+│   │   ├── loader.py
+│   │   ├── chunker.py
+│   │   ├── embedder.py
+│   │   ├── vector_store.py
+│   │   ├── retriever.py
+│   │   └── indexer.py
+│   │
+│   ├── services/
+│   │   ├── groq_service.py
+│   │   └── orchestrator.py
+│   │
+│   ├── static/
+│   ├── templates/
+│   └── utils/
 │
-├── chroma_db/
+├── assets/
+│   ├── logo.png
+│   └── style.css
+│
 ├── knowledge_base/
-├── workspace/
+│   └── pdfs/
+│       ├── CERT/
+│       ├── CWE/
+│       ├── Java/
+│       ├── OWASP/
+│       └── Python/
+│
+├── vector_db/
+│
+├── uploads/
+│
+├── reports/
+│
+├── streamlit_pages/
+│   ├── dashboard.py
+│   ├── assistant.py
+│   ├── reports.py
+│   └── about.py
+│
+├── streamlit_app.py
+├── build_kb.py
 ├── requirements.txt
+├── .env
 └── README.md
 ```
 
 ---
 
-# Current System Workflow
+# ⚙️ Installation
 
-```
-User
+Clone the repository.
 
-↓
+```bash
+git clone https://github.com/BharkaviPM/CodeGuard-ai.git
 
-Upload Code
-
-↓
-
-Validation
-
-↓
-
-Storage
-
-↓
-
-User Question
-
-↓
-
-Retriever
-
-↓
-
-ChromaDB
-
-↓
-
-Relevant Documents
-
-↓
-
-Prompt Builder
-
-↓
-
-Ollama (Llama 3)
-
-↓
-
-AI Response
+cd CodeGuard-ai
 ```
 
 ---
 
-# Milestone 1 Deliverables
+## Create Virtual Environment
 
-| Deliverable              | Status      |
-| ------------------------ | ----------- |
-| Project Architecture     | Completed |
-| PostgreSQL Integration   | Completed |
-| File Upload Module       | Completed |
-| Syntax Validation        | Completed |
-| Knowledge Base           | Completed |
-| PDF Loader               | Completed |
-| Chunking Pipeline        | Completed |
-| Embeddings               | Completed |
-| ChromaDB                 | Completed |
-| Retriever                | Completed |
-| RAG Pipeline             | Completed |
-| Ollama Integration       | Completed |
-| Conversational Assistant | Completed |
-| FastAPI APIs             | Completed |
-| Swagger Testing          | Completed |
+Windows
+
+```bash
+python -m venv .venv
+
+.venv\Scripts\activate
+```
+
+Linux / macOS
+
+```bash
+python3 -m venv .venv
+
+source .venv/bin/activate
+```
 
 ---
 
-# Current Limitations
+## Install Dependencies
 
-The current implementation is intentionally modular and educational. While fully functional, it is not yet production-grade.
-
-Current limitations include:
-
-* RAG services are initialized per request.
-* Ollama client is not cached.
-* Retriever instances are recreated for each query.
-* Prompt templates are tightly coupled with business logic.
-* Limited structured logging.
-* Basic exception handling.
-* No dependency injection for AI services.
-* No request tracing or metrics.
-* No LangGraph orchestration.
-* No agent coordination layer.
-* Static analysis tools are not yet integrated.
-
-These limitations will be addressed in Milestone 2.
+```bash
+pip install -r requirements.txt
+```
 
 ---
 
-# Milestone 2 Roadmap
+# 🔑 Environment Configuration
 
-Milestone 2 introduces the intelligent multi-agent analysis pipeline.
+Create a `.env` file in the project root.
 
-Planned components include:
+```env
+# ===========================
+# Groq
+# ===========================
 
-## Static Analysis Agent
+GROQ_API_KEY=your_groq_api_key
 
-* AST Analysis
-* Radon
-* Flake8
-* Pylint
-* Complexity Analysis
-* Code Smell Detection
+# ===========================
+# Application
+# ===========================
 
-## Security Agent
+APP_NAME=CodeGuard v3
 
-* Bandit
-* Semgrep
-* Detect Secrets
-* pip-audit
-* OWASP Mapping
+APP_VERSION=1.0.0
 
-## LangGraph Coordinator
+DEBUG=True
 
-Responsible for orchestrating all AI agents.
+# ===========================
+# PostgreSQL
+# ===========================
 
-Workflow:
+DB_HOST=localhost
+
+DB_PORT=5432
+
+DB_NAME=codeguard_v3
+
+DB_USER=postgres
+
+DB_PASSWORD=your_password
+
+# ===========================
+# Knowledge Base
+# ===========================
+
+KNOWLEDGE_BASE=knowledge_base/pdfs
+
+CHROMA_DB=vector_db
+
+UPLOAD_FOLDER=uploads
+
+REPORT_FOLDER=reports
+```
+
+---
+
+# 🐘 PostgreSQL Setup
+
+Create the database.
+
+```sql
+CREATE DATABASE codeguard_v3;
+```
+
+Verify the database connection.
+
+```bash
+python -m tests.test_connection
+```
+
+Expected Output
+
+```text
+Connected Successfully!
+PostgreSQL 17.x
+```
+
+---
+
+# 🧠 Build Knowledge Base
+
+Index all secure coding documents.
+
+```bash
+python -m build_kb
+```
+
+Expected Output
+
+```text
+Loading documents...
+
+Loaded 258 pages
+
+Created 737 chunks
+
+Knowledge Base Indexed Successfully
+```
+
+---
+
+# ▶️ Running the Project
+
+## Start FastAPI Backend
+
+```bash
+uvicorn app.main:app --reload
+```
+
+Open
 
 ```
-Coordinator
-
-├── Static Analysis Agent
-
-├── Security Agent
-
-├── AI Review Agent
-
-├── Remediation Agent
-
-└── PR Summary Agent
+http://127.0.0.1:8000
 ```
 
-## AI Review
+---
 
-* LLM-based code review
-* Design recommendations
-* Best practices
-* Secure coding improvements
+## Start Streamlit Dashboard
 
-## Remediation Agent
+```bash
+streamlit run streamlit_app.py
+```
 
-* Suggested code fixes
-* Secure alternatives
-* Explanation of vulnerabilities
+Open
 
-## Pull Request Summary Agent
+```
+http://localhost:8501
+```
+
+---
+
+# 🧪 Running Unit Tests
+
+Configuration
+
+```bash
+python -m tests.test_config
+```
+
+Database
+
+```bash
+python -m tests.test_connection
+```
+
+Knowledge Base
+
+```bash
+python -m tests.test_rag
+```
+
+Code Analysis Agent
+
+```bash
+python -m tests.test_code_agent
+```
+
+Security Agent
+
+```bash
+python -m tests.test_security_agent
+```
+
+Remediation Agent
+
+```bash
+python -m tests.test_remediation_agent
+```
+
+Summary Agent
+
+```bash
+python -m tests.test_summary_agent
+```
+
+Assistant Agent
+
+```bash
+python -m tests.test_assistant_agent
+```
+
+---
+
+# 📸 Screenshots
+
+Add screenshots of the application in this section.
+
+Suggested screenshots:
+
+- Dashboard
+- Upload Source Code
+- Code Analysis Results
+- Security Findings
+- AI Remediation
+- Pull Request Summary
+- AI Assistant
+- Reports Page
+- About Page
+
+Example
+
+```text
+screenshots/
+
+dashboard.png
+
+security.png
+
+remediation.png
+
+assistant.png
+
+reports.png
+```
+
+---
+
+---
+
+# 🎯 Milestone 3 Deliverables
+
+The following deliverables have been successfully completed in **CodeGuard v3**.
+
+## ✅ AI Code Analysis
+
+- Python Static Analysis
+- Java Static Analysis
+- Code Smell Detection
+- Best Practice Recommendations
+- AI Code Review
+
+---
+
+## ✅ Security Analysis
+
+Implemented security detection for:
+
+- SQL Injection
+- Command Injection
+- Unsafe eval()
+- Hardcoded Secrets
+- Path Traversal
+
+AI-powered security review is generated using the Groq LLM with OWASP secure coding guidance.
+
+---
+
+## ✅ AI Remediation
 
 Automatically generates:
 
-* Executive Summary
-* Issues Found
-* Severity Breakdown
-* Recommended Fixes
+- Explanation of vulnerabilities
+- Secure implementation
+- Complete rewritten code
+- OWASP-compliant recommendations
+- Maintainability improvements
 
 ---
 
-# Future Enhancements
+## ✅ Pull Request Summary
 
-* GitHub Pull Request Integration
-* GitLab Integration
-* CI/CD Pipeline Support
-* VS Code Extension
-* Docker Deployment
-* Kubernetes Deployment
-* Authentication & Authorization
-* Redis Caching
-* Background Workers
-* Monitoring & Observability
-* Multi-language Support
-* Enterprise Dashboard
+Generates a professional Pull Request review including:
+
+- Executive Summary
+- Code Quality Review
+- Security Review
+- Health Score
+- Severity Breakdown
+- Risk Assessment
+- Priority Fixes
+- Overall Recommendation
 
 ---
 
-# Milestone 1 Status
-
-**Status:** Completed
-
-The foundational infrastructure for CodeGuard AI has been successfully implemented.
-
-The system now supports:
-
-* AI-powered secure coding assistance
-* Retrieval-Augmented Generation (RAG)
-* Persistent knowledge retrieval
-* Conversational querying
-* Secure document indexing
-* RESTful API interaction
-
-This milestone establishes a strong foundation for the production-grade multi-agent architecture that will be developed in Milestone 2.
-
----
-# Milestone 2 Completion Report
-
----
-
-# Milestone Overview
-
-During Weeks 3–4, the focus shifted from building the foundational
-RAG infrastructure to implementing the intelligent analysis engine.
-This milestone introduces the first production-ready AI agents capable
-of automatically reviewing source code for quality and security issues.
-
----
-
-# Milestone Objectives
-
-The primary objectives were:
-
-• Build Code Analysis Agent
-• Build Security Vulnerability Agent
-• Implement Multi-Agent Orchestration
-• Validate Detection Accuracy
-• Standardize Findings
-• Prepare foundation for AI Remediation
-
----
-
-# Completed Features
-
-## 1. Code Analysis Agent
-
-Implemented a modular static analysis agent capable of identifying:
-
-• Code smells
-• Long methods
-• Large classes
-• Duplicate code
-• High cyclomatic complexity
-• Dead code
-• Unused imports
-• Design anti-patterns
-• Naming convention violations
-
-Outputs include:
-
-• Finding ID
-• File path
-• Line number
-• Severity
-• Category
-• Description
-• Recommendation
-
----
-
-## 2. Security Vulnerability Agent
-
-Implemented an automated security scanning agent supporting:
-
-• SQL Injection
-• Command Injection
-• Hardcoded Secrets
-• Weak Cryptography
-• Insecure Deserialization
-• Path Traversal
-• Unsafe File Operations
-• Broken Authentication
-• Insecure Randomness
-• Unsafe YAML Loading
-• OWASP Top 10 Mapping
-
-Each finding contains:
-
-• Vulnerability Type
-• CWE / OWASP Mapping
-• Severity
-• File
-• Line
-• Description
-• Suggested Fix
-
----
-
-## 3. Analyzer Registry
-
-Designed a dynamic analyzer registration framework.
+## ✅ Secure Coding Assistant
 
 Features:
 
-• Plug-and-play analyzers
-• Automatic discovery
-• Extensible architecture
-• Language-independent design
-• Easy integration of future analyzers
+- Retrieval-Augmented Generation (RAG)
+- Semantic Search
+- Secure Coding Guidance
+- OWASP Knowledge
+- CERT Secure Coding
+- CWE References
+- Python Secure Coding
+- Java Secure Coding
 
 ---
 
-## 4. Multi-Agent Orchestration
+## ✅ Dashboard
 
-Implemented parallel execution of:
+Provides:
 
-├── Code Analysis Agent
-└── Security Vulnerability Agent
-
-Outputs are merged into a unified findings collection.
-
-Benefits:
-
-• Faster execution
-• Modular architecture
-• Independent agent scalability
-• Simplified result aggregation
-
----
-
-## 5. Unified Findings Model
-
-Created a standardized schema for all analysis results.
-
-Includes:
-
-• Rule ID
-• Severity
-• Category
-• Confidence
-• Description
-• Recommendation
-• File
-• Line Number
+- Source Code Upload
+- Source Code Viewer
+- Project Overview
+- Health Score
+- Severity Dashboard
+- Code Findings
+- Security Findings
+- AI Reviews
+- AI Remediation
+- Pull Request Summary
+- Export Reports
 
 ---
 
-## 6. Detection Validation
+# 📈 Project Achievements
 
-Validated both agents using sample Python and Java repositories containing:
+✔ Multi-Agent AI Architecture
 
-• Code smells
-• Complexity issues
-• Security vulnerabilities
-• Poor design practices
+✔ Retrieval-Augmented Generation (RAG)
 
-Verified:
+✔ ChromaDB Knowledge Base
 
-• Detection accuracy
-• Severity classification
-• False positive handling
-• Result consistency
+✔ PostgreSQL Integration
 
----
+✔ Groq LLM Integration
 
-# Multi-Agent Workflow
+✔ Streamlit Dashboard
 
-User Upload
+✔ AI-powered Code Review
 
-↓
+✔ AI-powered Security Analysis
 
-Language Detection
+✔ AI-generated Secure Code
 
-↓
+✔ AI Pull Request Summary
 
-File Scanner
+✔ JSON Report Export
 
-↓
-
-Parallel Execution
-
-├── Code Analysis Agent
-
-└── Security Agent
-
-↓
-
-Merge Findings
-
-↓
-
-Unified Report
-
-↓
-
-Database Storage
-
-↓
-
-API Response
+✔ Markdown Report Export
 
 ---
 
-# Milestone 2 Deliverables
+# 🚀 Future Enhancements (Milestone 4)
 
-| Deliverable | Status |
-|------------|--------|
+The following enhancements are planned for the next version.
+
+### Security
+
+- XSS Detection
+- CSRF Detection
+- SSRF Detection
+- Weak Cryptography Detection
+- Insecure File Upload Detection
+- Broken Authentication Detection
+- Broken Access Control Detection
+- Insecure Deserialization Detection
+
+---
+
+### Code Quality
+
+- Cyclomatic Complexity
+- Duplicate Code Detection
+- Dead Code Detection
+- Long Method Detection
+- Magic Number Detection
+- Dependency Analysis
+
+---
+
+### Artificial Intelligence
+
+- Repository-Level Review
+- Multi-file Analysis
+- Cross-file Vulnerability Detection
+- AI Risk Prediction
+- AI Fix Confidence Score
+- Code Quality Trend Analysis
+
+---
+
+### Reporting
+
+- PDF Report Export
+- Excel Report Export
+- Historical Report Storage
+- Project Comparison Dashboard
+
+---
+
+### Dashboard
+
+- Interactive Charts
+- Trend Analytics
+- Vulnerability Timeline
+- Repository Statistics
+
+---
+
+### DevOps
+
+- Docker Support
+- GitHub Actions
+- CI/CD Integration
+- Git Pre-Commit Hooks
+
+---
+
+# 📌 Current Version
+
+| Component | Status |
+|-----------|--------|
 | Code Analysis Agent | ✅ Completed |
-| Security Vulnerability Agent | ✅ Completed |
-| Analyzer Registry | ✅ Completed |
-| Multi-Agent Orchestration | ✅ Completed |
-| Unified Findings Model | ✅ Completed |
-| Severity Classification | ✅ Completed |
-| OWASP Mapping | ✅ Completed |
-| Validation Testing | ✅ Completed |
+| Security Agent | ✅ Completed |
+| Remediation Agent | ✅ Completed |
+| PR Summary Agent | ✅ Completed |
+| AI Assistant | ✅ Completed |
+| Dashboard | ✅ Completed |
+| PostgreSQL | ✅ Completed |
+| ChromaDB | ✅ Completed |
+| RAG Pipeline | ✅ Completed |
+| Knowledge Base | ✅ Completed |
 
 ---
 
-# Current Limitations
+# 🤝 Contributing
 
-Current implementation does not yet include:
+Contributions are welcome.
 
-• AI-generated code fixes
-• LangGraph workflow orchestration
-• Automatic report generation
-• GitHub Pull Request integration
-• Incremental scanning
-• Background task execution
-• Cross-file dependency analysis
+1. Fork the repository
+2. Create a feature branch
 
-These enhancements are planned for Milestone 3.
+```bash
+git checkout -b feature/my-feature
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push your branch
+
+```bash
+git push origin feature/my-feature
+```
+
+5. Create a Pull Request
 
 ---
 
-# Milestone 2 Status
+# 📄 License
 
-**Status:** Completed
+This project is released under the **MIT License**.
 
-CodeGuard AI now supports automated static analysis through a modular multi-agent architecture. The platform can independently analyze code quality and security vulnerabilities, aggregate results into a unified report, and provide structured findings with severity scoring and precise source locations.
+You are free to use, modify, and distribute this project under the terms of the MIT License.
 
 ---
 
-<img width="1889" height="911" alt="Image" src="https://github.com/user-attachments/assets/5c2a7e7e-b4f1-4d4a-b9d5-2c55d0e39c89" />
-<img width="1871" height="895" alt="Image" src="https://github.com/user-attachments/assets/701792d1-f416-4f92-b24b-ad62a5e7b8d4" />
-<img width="1360" height="770" alt="Image" src="https://github.com/user-attachments/assets/22888716-00a5-4d7d-860d-4cb8921dc258" />
-<img width="1413" height="757" alt="Image" src="https://github.com/user-attachments/assets/faef5697-f625-4c3b-97e0-6bae44c85f6b" />
-<img width="1392" height="863" alt="Image" src="https://github.com/user-attachments/assets/0c37e368-3336-4cc5-a773-7dda39ee495f" />
+# 👨‍💻 Author
 
+**Bharkavi P M**
 
-# Next Milestone
+AI Engineer | Python Developer | Full Stack Developer
 
-## Milestone 3 (Week 5–6)
+GitHub:
+
+https://github.com/BharkaviPM
+
+---
+
+# 🙏 Acknowledgements
+
+Special thanks to the open-source community and the following technologies:
+
+- Python
+- Streamlit
+- PostgreSQL
+- ChromaDB
+- Groq
+- LangChain
+- Sentence Transformers
+- OWASP Foundation
+- CERT Secure Coding
+- CWE
+- Hugging Face
+
+---
+
+# ⭐ Support
+
+If you found this project useful:
+
+⭐ Star this repository
+
+🍴 Fork the repository
+
+🛠️ Contribute improvements
+
+📢 Share your feedback
+
+---
+
+# 🛡️ CodeGuard v3
+
+**AI Code Review & Security Analysis Platform**
+
+Built with ❤️ using Python, Streamlit, PostgreSQL, ChromaDB, and Groq.
+
+---
+
+## 📚 Repository Status
+
+**Version:** 1.0.0
+
+**Release:** CodeGuard v3
+
+**Architecture:** Multi-Agent AI + RAG
+
+**Development Status:** Milestone 3 Completed ✅
