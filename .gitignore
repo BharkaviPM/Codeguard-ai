@@ -1,10 +1,6 @@
-
-venv/
+.venv/
 __pycache__/
 *.pyc
 .env
 vector_db/
-uploads/
-reports/
-logs/
-streamlit_apps.py
+reports/generated/
