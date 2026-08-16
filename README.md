@@ -11,7 +11,7 @@
 
 ---
 
-## 🚀 Project Overview
+## Overview of project
 
 CodeGuard AI v3 is an AI-powered Multi-Agent Code Review and Security Analysis Platform that automates software code reviews, vulnerability detection, performance analysis, remediation generation, and secure coding guidance.
 
@@ -29,7 +29,7 @@ Developers can upload or paste Python and Java source code, receive AI-powered r
 
 ---
 
-# 🎯 Problem Statement
+# Problem Statement
 
 Software teams frequently face:
 
@@ -45,9 +45,9 @@ CodeGuard AI solves these challenges using specialized AI agents that analyze so
 
 ---
 
-# ✨ Features
+# Features
 
-## 🔍 Code Analysis
+# Code Analysis
 
 - Python Code Review
 - Java Code Review
@@ -56,7 +56,7 @@ CodeGuard AI solves these challenges using specialized AI agents that analyze so
 - Maintainability Analysis
 - Readability Improvements
 
-## 🔒 Security Analysis
+# Security Analysis
 
 - OWASP Vulnerability Detection
 - SQL Injection Detection
@@ -66,7 +66,7 @@ CodeGuard AI solves these challenges using specialized AI agents that analyze so
 - Path Traversal Detection
 - Security Severity Classification
 
-## ⚡ Performance Analysis
+# Performance Analysis
 
 - Time Complexity Review
 - Space Complexity Review
@@ -75,7 +75,7 @@ CodeGuard AI solves these challenges using specialized AI agents that analyze so
 - Memory Usage Review
 - Performance Optimization Suggestions
 
-## 📊 Risk Assessment
+# Risk Assessment
 
 - Risk Scoring
 - Severity Classification
@@ -83,7 +83,7 @@ CodeGuard AI solves these challenges using specialized AI agents that analyze so
 - Business Impact Evaluation
 - Risk Prioritization
 
-## 🛠️ AI Remediation
+# AI Remediation
 
 - Vulnerability Explanations
 - Secure Code Suggestions
@@ -91,7 +91,7 @@ CodeGuard AI solves these challenges using specialized AI agents that analyze so
 - OWASP-Compliant Fixes
 - Production-Ready Improvements
 
-## 💬 Secure Coding Assistant
+# Secure Coding Assistant
 
 - RAG-Powered Chatbot
 - OWASP Guidance
@@ -99,7 +99,7 @@ CodeGuard AI solves these challenges using specialized AI agents that analyze so
 - CERT Secure Coding Standards
 - Context-Aware Security Answers
 
-## 📄 Reporting
+# Reporting
 
 - PDF Report Export
 - Executive Summary
@@ -110,7 +110,7 @@ CodeGuard AI solves these challenges using specialized AI agents that analyze so
 
 ---
 
-# 🏗️ System Architecture
+# System Architecture
 
 ```text
                 Streamlit Dashboard
@@ -158,9 +158,9 @@ CodeGuard AI solves these challenges using specialized AI agents that analyze so
 
 ---
 
-# 🤖 AI Agents
+# AI Agents
 
-## 📋 1. Code Analysis Agent
+## 1. Code Analysis Agent
 
 ### Responsibilities
 
@@ -178,7 +178,7 @@ CodeGuard AI solves these challenges using specialized AI agents that analyze so
 
 ---
 
-## 🔒 2. Security Agent
+## 2. Security Agent
 
 ### Responsibilities
 
@@ -195,7 +195,7 @@ CodeGuard AI solves these challenges using specialized AI agents that analyze so
 
 ---
 
-## ⚡ 3. Performance Agent
+## 3. Performance Agent
 
 ### Responsibilities
 
@@ -212,7 +212,7 @@ CodeGuard AI solves these challenges using specialized AI agents that analyze so
 
 ---
 
-## 📊 4. Risk Assessment Agent
+## 4. Risk Assessment Agent
 
 ### Responsibilities
 
@@ -228,7 +228,7 @@ CodeGuard AI solves these challenges using specialized AI agents that analyze so
 
 ---
 
-## 🛠️ 5. Remediation Agent
+## 5. Remediation Agent
 
 ### Responsibilities
 
@@ -244,7 +244,7 @@ CodeGuard AI solves these challenges using specialized AI agents that analyze so
 
 ---
 
-## 📄 6. Summary Agent
+## 6. Summary Agent
 
 ### Responsibilities
 
@@ -260,7 +260,7 @@ CodeGuard AI solves these challenges using specialized AI agents that analyze so
 
 ---
 
-## 💬 7. Secure Coding Assistant
+## 7. Secure Coding Assistant
 
 ### Responsibilities
 
@@ -276,7 +276,7 @@ CodeGuard AI solves these challenges using specialized AI agents that analyze so
 
 ---
 
-# 🧠 Retrieval-Augmented Generation (RAG)
+# Retrieval-Augmented Generation (RAG)
 
 CodeGuard AI includes a Retrieval-Augmented Generation pipeline for secure coding assistance.
 
@@ -314,7 +314,7 @@ Security-Aware Response
 
 ---
 
-# 🛠️ Technology Stack
+# Technology Stack
 
 | Layer | Technology |
 |---------|------------|
@@ -331,7 +331,7 @@ Security-Aware Response
 
 ---
 
-# 📁 Project Structure
+# Project Structure
 
 ```text
 CodeGuard-ai/
@@ -382,7 +382,7 @@ CodeGuard-ai/
 
 ---
 
-# ⚙️ Installation
+# Installation
 
 ## Clone Repository
 
@@ -422,7 +422,7 @@ pip install -r requirements.txt
 
 ---
 
-# 🔑 Environment Configuration
+# Environment Configuration
 
 Create a `.env` file in the project root.
 
@@ -436,7 +436,7 @@ CHROMA_DB_PATH=vector_db
 
 ---
 
-# 🧠 Build Knowledge Base
+# Build Knowledge Base
 
 ```bash
 python index_knowledge_base.py
@@ -453,7 +453,7 @@ Knowledge Base Indexed Successfully
 
 ---
 
-# ▶️ Running the Application
+# Running the Application
 
 ```bash
 streamlit run app.py
@@ -467,24 +467,24 @@ http://localhost:8501
 
 ---
 
-# 📊 Dashboard Features
+# Dashboard Features
 
 The dashboard includes:
 
-- 📤 Source Code Upload
-- 📋 Code Review Results
-- 🔒 Security Findings
-- ⚡ Performance Analysis
-- 📊 Risk Assessment
-- 🛠️ Remediation Suggestions
-- 📄 Executive Summary
-- 💬 Secure Coding Assistant
-- 📈 Severity Dashboard
-- 📄 PDF Export
+-  Source Code Upload
+-  Code Review Results
+-  Security Findings
+-  Performance Analysis
+-  Risk Assessment
+-  Remediation Suggestions
+-  Executive Summary
+-  Secure Coding Assistant
+-  Severity Dashboard
+-  PDF Export
 
 ---
 
-# 📸 Screenshots
+# Screenshots
 
 ## Dashboard
 
@@ -526,7 +526,7 @@ screenshots/report.png
 
 ---
 
-# 🧪 Running Tests
+# Running Tests
 
 ```bash
 python -m tests.test_groq
@@ -569,7 +569,7 @@ python -m tests.test_pdf
 
 ---
 
-# 🎯 Milestone Progress
+# Milestone Progress
 
 ## Phase 1 – Foundation ✅
 
@@ -592,7 +592,7 @@ python -m tests.test_pdf
 - Dashboard Enhancements
 - PDF Reporting
 
-## Phase 4 – Planned
+## Phase 4 – ✅
 
 - LangGraph Parallel Execution
 - Bandit Integration
@@ -604,7 +604,7 @@ python -m tests.test_pdf
 
 ---
 
-# 📌 Version Information
+# Version Information
 
 | Item | Value |
 |--------|--------|
@@ -615,7 +615,7 @@ python -m tests.test_pdf
 
 ---
 
-# 🤝 Contributing
+# Contributing
 
 1. Fork the repository
 
@@ -641,7 +641,7 @@ git push origin feature/new-feature
 
 ---
 
-# 👨‍💻 Author
+# Author
 
 **Bharkavi P M**
 
@@ -652,18 +652,18 @@ https://github.com/BharkaviPM
 
 ---
 
-# ⭐ Support
+# Support
 
 If you found this project useful:
 
-- ⭐ Star the repository
-- 🍴 Fork the project
-- 🛠️ Contribute improvements
-- 📢 Share feedback
+-  Star the repository
+-  Fork the project
+-  Contribute improvements
+-  Share feedback
 
 ---
 
-# 📄 License
+# License
 
 This project is licensed under the MIT License.
 
