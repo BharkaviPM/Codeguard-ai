@@ -488,44 +488,41 @@ The dashboard includes:
 
 ## Dashboard
 
-Add screenshot here:
-
 ```text
 screenshots/dashboard.png
+```
 <img width="1874" height="891" alt="Image" src="https://github.com/user-attachments/assets/084dad45-eb95-4039-9c37-fa05530cb4f5" />
 <img width="1812" height="856" alt="Image" src="https://github.com/user-attachments/assets/175b4ca6-5e20-4307-b11e-ed11eab94858" />
-```
 
 ## Security Analysis
 
 ```text
 screenshots/security.png
+```
 <img width="1812" height="856" alt="Image" src="https://github.com/user-attachments/assets/6b1ad62b-3419-41d6-8606-1aa414e3a0aa" />
 <img width="1852" height="862" alt="Image" src="https://github.com/user-attachments/assets/2d78bb71-d738-4fbb-8863-7dd973495111" />
-
-```
 
 ## Performance Review
 
 ```text
 screenshots/performance.png
-<img width="1817" height="840" alt="Image" src="https://github.com/user-attachments/assets/9608b312-6828-456e-9cf7-c8438581f464" />
 ```
+<img width="1817" height="840" alt="Image" src="https://github.com/user-attachments/assets/9608b312-6828-456e-9cf7-c8438581f464" />
 
 ## Risk Assessment
 
 ```text
 screenshots/risk.png
-<img width="1843" height="857" alt="Image" src="https://github.com/user-attachments/assets/9b5a7e96-fd71-4e61-82ae-162b1e47b6f2" />
-
 ```
+<img width="1843" height="857" alt="Image" src="https://github.com/user-attachments/assets/9b5a7e96-fd71-4e61-82ae-162b1e47b6f2" />
 
 ## PDF Report
 
 ```text
 screenshots/report.png
-<img width="1863" height="910" alt="Image" src="https://github.com/user-attachments/assets/d47fec92-ff54-4cae-ab70-e9370bf806e1" />
 ```
+<img width="1863" height="910" alt="Image" src="https://github.com/user-attachments/assets/d47fec92-ff54-4cae-ab70-e9370bf806e1" />
+<img width="1764" height="863" alt="Image" src="https://github.com/user-attachments/assets/b7cee482-9e30-4cb8-a44a-a3d43abd467d" />
 
 ---
 
