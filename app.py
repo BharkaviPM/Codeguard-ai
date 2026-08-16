@@ -6,6 +6,7 @@ from pathlib import Path
 from workflows.review_workflow import ReviewWorkflow
 from rag.chat_service import ChatService
 from reports.pdf_generator import PDFGenerator
+from reports.markdown_report import MarkdownReport
 
 # =====================================================
 # PAGE CONFIG
@@ -274,7 +275,7 @@ if st.session_state.analysis:
     st.markdown("---")
     st.markdown("# 📊 Analysis Dashboard")
 
-    m1,m2,m3,m4 = st.columns(4)
+    m1, m2, m3, m4 = st.columns(4)
 
     with m1:
         st.metric("Security", "High")
@@ -289,8 +290,8 @@ if st.session_state.analysis:
         st.metric("Health Score", "82")
 
     severity = pd.DataFrame({
-        "Severity":["High","Medium","Low"],
-        "Count":[5,3,2]
+        "Severity": ["High", "Medium", "Low"],
+        "Count": [5, 3, 2]
     })
 
     fig = px.bar(
@@ -305,7 +306,7 @@ if st.session_state.analysis:
         use_container_width=True
     )
 
-    tab1,tab2,tab3,tab4,tab5,tab6 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
         "Security",
         "Code Review",
         "Remediation",
@@ -315,87 +316,111 @@ if st.session_state.analysis:
     ])
 
     with tab1:
-        st.markdown(result["security_review"])
+        st.markdown(
+            result.get(
+                "security_review",
+                "No security review available."
+            )
+        )
 
     with tab2:
-        st.markdown(result["code_review"])
+        st.markdown(
+            result.get(
+                "code_review",
+                "No code review available."
+            )
+        )
 
     with tab3:
-        st.markdown(result["remediation"])
+        st.markdown(
+            result.get(
+                "remediation",
+                "No remediation available."
+            )
+        )
 
     with tab4:
-        st.markdown(result["summary"])
+        st.markdown(
+            result.get(
+                "summary",
+                "No summary available."
+            )
+        )
 
     with tab5:
-
         st.markdown(
-        result.get(
-            "performance_review",
-            "Performance review not available."
+            result.get(
+                "performance_review",
+                "Performance review not available."
+            )
         )
-    )
+
     with tab6:
         st.markdown(
-        result.get(
-            "risk_report",
-            "Risk assessment not available."
-        )
-    )
-
-        if st.button("📄 Generate PDF"):
-
-            full_report = f""" 
-        
-        SECURITY REVIEW
-
-{result.get('security_review','')}
-
----
-
-CODE REVIEW
-
-{result.get('code_review','')}
-
----
-
-PERFORMANCE REVIEW
-
-{result.get('performance_review','')}
-
----
-
-RISK ASSESSMENT
-
-{result.get('risk_report','')}
-
----
-
-REMEDIATION
-
-{result.get('remediation','')}
-
----
-
-SUMMARY
-
-{result.get('summary','')}
-"""
-
-        PDFGenerator.generate(
-            full_report,
-            "reports/code_review_report.pdf"
+            result.get(
+                "risk_report",
+                "Risk assessment not available."
+            )
         )
 
-        with open(
-            "reports/code_review_report.pdf",
-            "rb"
-        ) as f:
+    st.markdown("---")
 
-            st.download_button(
-                "⬇ Download Report",
-                f,
-                "code_review_report.pdf",
-                "application/pdf"
+    if st.button("📄 Generate PDF Report"):
+
+        try:
+
+            report = MarkdownReport.generate(
+                security_review=result.get(
+                    "security_review", ""
+                ),
+                code_review=result.get(
+                    "code_review", ""
+                ),
+                performance_review=result.get(
+                    "performance_review", ""
+                ),
+                remediation=result.get(
+                    "remediation", ""
+                ),
+                risk_report=result.get(
+                    "risk_report", ""
+                ),
+                summary=result.get(
+                    "summary", ""
+                ),
+                metrics={
+                    "high": 5,
+                    "medium": 3,
+                    "low": 2,
+                    "health_score": 82
+                }
+            )
+
+            output_path = PDFGenerator.generate(
+                report,
+                "reports/code_review_report.pdf"
+            )
+
+            st.success(
+                "PDF report generated successfully."
+            )
+
+            with open(
+                output_path,
+                "rb"
+            ) as pdf_file:
+
+                st.download_button(
+                    label="⬇ Download Report",
+                    data=pdf_file,
+                    file_name="code_review_report.pdf",
+                    mime="application/pdf"
+                )
+
+        except Exception as e:
+
+            st.error(
+                f"Failed to generate report: {str(e)}"
             )
 # =====================================================
 # CHAT
