@@ -247,7 +247,7 @@ if code_input.strip():
 # ANALYZE
 # =====================================================
 
-if st.button("🚀 Analyze Code"):
+if st.button("Analyze Code"):
 
     code = st.session_state.uploaded_code
 

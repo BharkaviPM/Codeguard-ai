@@ -22,7 +22,7 @@ class GroqService:
 
     model = os.getenv(
         "GROQ_MODEL",
-        "llama-3.1-8b-instant"
+        "openai/gpt-oss-120b"
     )
 
     @staticmethod
